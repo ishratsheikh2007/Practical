@@ -1,0 +1,38 @@
+# You are provided with the Titanic dataset containing information about passengers on the Titanic. Your task is to write Python code to answer the following questions based on the dataset. For each question, perform necessary data cleaning, transformations, and calculations as required.
+
+import pandas as pd
+import numpy as np
+
+# Load the Titanic dataset
+data = pd.read_csv('Titanic-Dataset.csv')
+
+# 1. Display the first 5 rows of the dataset
+print(data.head())
+
+# 2. Display the last 5 rows of the dataset
+print(data.tail())
+
+# 3. Get the shape of the dataset
+print(data.shape)
+
+# 4. Get a summary of the dataset (info)
+print(data.info())
+
+# 5. Get basic statistics of the dataset
+print(data.describe())
+
+# 6. Check for missing values
+print(data.isnull().sum())
+
+# 7. Fill missing values in the ‘Age’ column with the median age
+median_age = data['Age'].median()
+data['Age'].fillna(median_age, inplace=True)
+# 8. Fill missing values in the ‘Embarked’ column with the mode
+mode_embarked = data['Embarked'].mode() [0]
+data['Embarked'].fillna(mode_embarked, inplace=True)
+
+# 9. Drop the ‘Cabin’ column due to many missing values
+data.drop('Cabin', axis=1, inplace=True)
+
+# 10. Create a new column 'FamilySize’ by adding ‘SibSp' and ‘Parch'
+data['familySize'] = data['SibSp'] + data['Parch']
